@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificados Laborales</title>
+  <link rel="icon" href="recursos1.jpg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/C_emp.css') }}" />
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+          <h1>Maria Sanchez</h1>
+        </div>
+        <ul>
+          <li><a href="{{url_for('contrato1')}}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Contratos</span>
+            </a></li>
+          <li><a href="{{url_for('certificados')}}">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Certificados</span>
+            </a></li>
+          <li><a href="{{url_for('permisos')}}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Permisos</span>
+            </a></li>
+          <li><a href="{{url_for('incapacidades')}}">
+              <i class="fab fa-dochub"></i>
+              <span class="nav-item">Incapacidades</span>
+            </a></li>
+            <li><a href="{{url_for('empleados')}}">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Empleados</span>
+              </a></li>
+          <li><a href="{{url_for('dashboard')}}">
+              <span class="nav-item">Inicio</span>
+            </a></li>
+            <li><a href="{{url_for('index')}}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Cerrar sesion</span>
+            </a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main">
+      <div class="main-top">
+        <p>Consulta Incapacidades</p>
+        <div class="buttons">
+          <button onclick="toggleCreateForm()" class="btn btn-create">Crear</button>
+        </div>
+      </div>
+      <div class="main-body">
+        <h1>Incapacidades</h1>
+        <div class="col-25 p-2 m-auto">
+          <table class="table">
+            <thead class="bg-info">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre del empleado</th>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Fecha de terminacion</th>
+                <th scope="col">Numero de incapacidades</th>
+                <th scope="col">Duracion (Dias)</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr>
+                <td>{{i.idIncapacidad}}</td>
+                <td>{{i.nombre_empleado}}</td>
+                <td>{{i.fecha_inicio}}</td>
+                <td>{{i.fecha_fin}}</td>
+                <td>{{i.numIncapacidad}}</td>
+                <td>{{i.duracion}}</td>
+                <td>
+                  <button onclick="toggleEditForm('{{ i.idIncapacidad }}')" class="btn btn-warning"><i
+                      class="fa-solid fa-user-pen"></i> Editar</button>
+                </td>
+                <td>
+                  <a href="{{ url_for('delete_incap', id=i.idIncapacidad) }}" class="btn btn-delete">Eliminar</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Formulario para crear una nueva incapacidad -->
+        <div class="form-container" id="create-form-container">
+          <form action="add_incap" method="POST">
+            <div class="form-group">
+              <center><label for="banco">Añadir una Incapacidad</label></center>
+            </div>
+            <div class="form-group">
+              <label for="nombre_empleado">Nombre del Empleado:</label>
+              <select id="nombre_empleado" name="nombre_empleado" required>
+                <option value="">--Seleccione un Empleado--</option>
+                {% for empleado in empleados %}
+                <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fecha_inicio">Fecha de inicio:</label>
+              <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+            </div>
+            <div class="form-group">
+              <label for="fecha_fin">Fecha de terminacion:</label>
+              <input type="date" id="fecha_fin" name="fecha_fin" required>
+            </div>
+            <div class="form-group">
+              <label for="numIncapacidad">Número de incapacidades:</label>
+              <input type="text" id="numIncapacidad" name="numIncapacidad" required>
+            </div>
+            <div class="form-group">
+              <label for="duracion">Duración de incapacidad (días):</label>
+              <input type="text" id="duracion" name="duracion" required>
+            </div>
+            <button type="submit" class="btn btn-submit">Guardar</button>
+          </form>
+        </div>
+
+        <!-- Formulario emergente de edición -->
+        {% for i in data %}
+        <div class="edit-form-container" id="edit-form-container-{{ i.idIncapacidad}}" style="display: none;">
+          <form action="{{ url_for('edit_incap', id=i.idIncapacidad) }}" method="POST">
+            <input type="hidden" id="edit_id" name="id" value="{{ i.idIncapacidad }}">
+            <div class="form-group">
+              <label for="edit_nombre_empleado">Nombre del Empleado:</label>
+              <select id="edit_nombre_empleado" name="nombre_empleado">
+                {% for empleado in empleados %}
+                <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit_fecha_inicio">Fecha de inicio:</label>
+              <input type="text" id="edit_fecha_inicio" name="fecha_inicio" value="{{i.fecha_inicio}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_fecha_fin">Fecha de fin:</label>
+              <input type="text" id="edit_fecha_fin" name="fecha_fin" value="{{i.fecha_fin}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_numIncapacidad">Numero de incapacidades:</label>
+              <input type="text" id="edit_numIncapacidad" name="numIncapacidad" value="{{i.numIncapacidad}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_duracion">Duracion:</label>
+              <input type="text" id="edit_duracion" name="duracion" value="{{i.duracion}}">
+            </div>
+            <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+</html>

@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+}
+
+body{
+  font-family: 'Nunito', sans-serif;
+  background-color: #dfe9f5;
+  margin: 0;
+}
+
+a{
+  font-size: 700;
+  text-decoration: none;
+  color: black;
+}
+
+.contenedor{
+  padding: 60px 0;
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.titulo{
+  color: #413477;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Header */
+
+
+header {
+  display: flex;
+  min-height: 70px;
+  background-color: #4082a5;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10%;
+}
+
+.header .nav-links li:hover{
+  transform: scale(1.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  width: auto;
+  height: 70px;
+  transition: all 0.3s;
+}
+
+.header .logo .img:hover{
+  transform: scale(1.2);
+}
+
+nav a{
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+
+.header .nav-links{
+  list-style: none;
+}
+
+.header .nav-links li{
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .btn button{
+  font-weight: 700;
+  color: #1b3039;
+  padding: 9px 25px;
+  background: #eceff1;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 30.s ease 0s;
+}
+
+.header .btn button:hover{
+  background-color: #e2f1f8;
+  color: #af20d3;
+  transform: scale(1.1);
+}
+
+@media (max-width:700px){
+  header{
+      flex-direction: column;
+  }
+
+  nav{
+      padding: 10px 0px;
+  }
+}
+
+/* body */
+
+.container {
+  width: 1000px;
+  height: 550px;
+  margin: 30px auto;
+  display: flex;
+  background: rgb(214, 214, 214);
+  border-radius: 10px;
+  box-shadow: 5px 5px 7px gray, -5px -5px 7px gray;
+}
+.login {
+  width: 500px;
+}
+form {
+  width: 230px;
+  margin: 100px auto;
+}
+form h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+p {
+  text-align: center;
+}
+form label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px;
+  outline: none;
+  border: none;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+/**/
+
+.button {
+  inline-size: 250px;
+  margin: 8px;
+  padding: 8px;
+  background: purple;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.button span {
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.button:hover span {
+  padding-right: 30px;
+}
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/**/
+p a {
+  text-decoration: none;
+  color: black;
+}
+hr {
+  border-top: 2px solid purple;
+}
+.pic {
+  width: 75%;
+  background: #4082a5;
+}
+.pic img {
+  width: 400px;
+  margin: 70px 0 0 100px;
+}
+img:hover {
+  padding: 3px;
+  cursor: pointer;
+}
+
+/* footer */
+
+footer{
+  background: #4082a5;
+  padding: 60px 0 30px 0;
+  margin: auto;
+  overflow: hidden;
+}
+
+.contenedor-footer{
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+  margin: auto;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.content-foo{
+  text-align: center;
+}
+
+.content-foo h4{
+  color: #fff;
+  border-bottom: 3px solid #af20d3;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.content-foo p{
+  color: #fafafa;
+}
+
+.content-foo a{
+  color: #fafafa;
+}
+
+.titulo-final{
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0 0 0;
+  color: black;
+}
+
+.buttons{
+  max-width: 700px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons a {
+  text-decoration: none;
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background: #314652;
+  color: #f1f1f1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+}

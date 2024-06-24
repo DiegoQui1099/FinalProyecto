@@ -1,0 +1,177 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/Logo.jpeg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <title>Topografic Service</title>
+</head>
+<body>
+    <header class="header">
+        <div class="Logo">
+            <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('proyectos') }}" class="nav-link">Proyectos</a></li>
+                <li><a href="{{ url_for('rh') }}" class="nav-link">Recursos Humanos</a></li>
+                <li><a href="{{ url_for('contacto') }}" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="{{ url_for('iniciosesion') }}" class="btn"><button>Iniciar Sesión</button></a>
+    </header>
+
+    <main>
+        <section class="contenedor sobre-nosotros">
+            <h2 class="titulo">Nuestros Servicios</h2>
+            <div class="contenedor-sobre-nosotros">
+                <img src="{{ url_for('static', filename='images/banner.jpg') }}" width="500px" alt="">
+                <div class="contenido-texto">
+                    <h3><span>1</span>Los Mejores Servicios</h3>
+                    <p>Empresa Especializada en servicios topográficos con gran experiencia y amplia cantidad de empleados, maquinaria, etc.</p>
+                    <h3><span>2</span>Nuestros Empleados</h3>
+                    <p>Empleados altamente calificados para el trabajo y entregados a su cargo</p>
+                    <h3><span>3</span>Topografía</h3>
+                    <p>Solicita los proyectos que deseas realizar, ten en cuenta que somos una empresa de topografia en general tienes una lista de proyectos o funciones en la cual tu puedes elegir.</p>
+                </div>
+            </div>
+        </section>
+        <section class="portafolio">
+            <div class="contenedor">
+                <h2 class="titulo">Portafolio</h2>
+                <div class="galeria-port">
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img1.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img2.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img3.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img4.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img5.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img6.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img7.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="imagen-port">
+                        <img src="{{ url_for('static', filename='images/img8.jpg') }}" alt="">
+                        <div class="hover-galeria">
+                            <img src="{{ url_for('static', filename='images/selection1.png') }}" alt="">
+                            <a href="https://tuequipo.co/categoria/topografia">clic</a>
+                            <p>Nuestros Proyectos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="clientes contenedor">
+            <h2 class="titulo">Que dicen nuestros clientes</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/img9.jpg') }}" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Cliente 1</h4>
+                        <p>Satisfecho con los proyectos que he solicitado a la empresa, eficaces a la hora de trabajar y acuerdos completos para la terminacion de los mismos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/img10.jpg') }}" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Cliente 2</h4>
+                        <p>Muy buena empresa dedicada a la realizacion de proyectos topograficos, buena experienca del personal y buena atencion en los proyectos a realizar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="about-service">
+            <div class="contenedor">
+                <h2 class="titulo">Nuestros Servicios</h2>
+                <div class="servicio-cont">
+                    <div class="servicio-ind">
+                        <img src="{{ url_for('static', filename='images/servicio1.png') }}" alt="">
+                        <h3>Proyectos realizados</h3>
+                        <p>Todo proyecto realizado se le llevara a cabo su debido control y asi mismo el cliente podra saber como van los abances de su proyecto cada que el desee.</p>
+                    </div>
+                    <div class="servicio-ind">
+                        <img src="{{ url_for('static', filename='images/servicio2.jpg') }}" alt="">
+                        <h3>Servicios</h3>
+                        <p>Alta gama de servicios para proyectos topograficos, contamos con una gran variedad de campos en los cuales nos desempeñamos de manera eficaz, no dudes en realizar tu proyecto con nostros.</p>
+                    </div>
+                    <div class="servicio-ind">
+                        <img src="{{ url_for('static', filename='images/servicio3.jpg') }}" alt="">
+                        <h3>Nuestros empleados</h3>
+                        <p>Gran variedad de empleados asociados, profecionales a cargo de los proyectos y personal capacitado para todo tipo de trabajo a realizar. <br><br> Si quieres ser parte de nuestra familia no lo dudes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Mapa de sitio</h4>
+                <p><a href="Mapa de sitio.html">Mapa de sitio</a></p>
+            </div>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>serviciostopografic1@hotmail.com</p>
+            </div>
+            <div class="content-foo">
+                <h4>Redes</h4>
+                <section class="buttons">
+                    <a href="https://www.facebook.com/profile.php?id=100092641494792" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com/STopografi83139" class="fa fa-twitter"></a>
+                    <a href="https://www.instagram.com/stopograficos/?__coig_restricted=1" class="fa fa-instagram"></a>
+                </section>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Servicios Topograficos | Gaes 7</h2>
+    </footer>
+</body>
+</html>

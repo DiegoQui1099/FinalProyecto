@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados Laborales</title>
+    <link rel="icon" href="recursos1.jpg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/C_emp.css') }}" />
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="navbar">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+                    <h1> Jose Mendoza </h1>
+                </div>
+                <ul>
+                    <li><a href="{{url_for('dashproyectos')}}">
+                            Inicio
+                            <i class="fa-regular fa-house"></i>
+                        </a></li>
+                    <li><a href="{{url_for('contratoProyecto')}}">
+                            Contratos
+                            <i class="fas fa-file"></i>
+                        </a></li>
+                    <br>
+                    <li><a href="{{url_for('index')}}" class="logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="nav-item">Cerrar sesion</span>
+                        </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="main">
+            <div class="main-top">
+                <p>Consulta Contratos</p>
+            </div>
+            <div class="main-body">
+                <h1>Contratos</h1>
+                <div class="col-25 p-2 m-auto">
+                    <table class="table">
+                        <thead class="bg-info">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Descripción del Contrato</th>
+                                <th scope="col">Cliente que lo Solicita</th>
+                                <th scope="col">Proyecto Solicitado</th>
+                                <th scope="col">Estado de la Solicitud</th>
+                                <th scope="col">Editar Solicitud</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in data %}
+                            <tr>
+                                <td>{{ s.idSolicitud }}</td>
+                                <td>{{ s.desc_solicitud }}</td>
+                                <td>{{ s.nom_cliente }}</td>
+                                <td>{{ s.nom_proyecto }}</td>
+                                <td>{{ s.Estado }}</td>
+                                <td>
+                                    <button onclick="toggleEditForm('{{ s.idSolicitud }}')" class="btn btn-warning"><i
+                                            class="fa-solid fa-user-pen"></i> Editar</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Formulario emergente de edición -->
+                {% for s in data %}
+                <div class="edit-form-container" id="edit-form-container-{{ s.idSolicitud }}" style="display: none;">
+                    <form action="{{ url_for('edit_solicitudC', id=s.idSolicitud) }}" method="POST">
+                        <input type="hidden" id="edit_id" name="id" value="{{ s.idSolicitud }}">
+                        <div class="form-group">
+                            <label for="edit_estado">Estado:</label>
+                            <select id="edit_estado" name="estado">
+                                <option value="pendiente" {% if s.Estado=='pendiente' %} selected {% endif %}>Pendiente
+                                </option>
+                                <option value="aceptado" {% if s.Estado=='aceptado' %} selected {% endif %}>Aceptado
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+                    </form>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </section>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        function toggleEditForm(id) {
+            var formContainer = document.getElementById('edit-form-container-' + id);
+            if (formContainer.style.display === 'none') {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

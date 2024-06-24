@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados Laborales</title>
+    <link rel="icon" href="recursos1.jpg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/C_emp.css') }}" />
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+          <h1>Maria Sanchez</h1>
+        </div>
+        <ul>
+          <li><a href="{{url_for('contrato1')}}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Contratos</span>
+            </a></li>
+          <li><a href="{{url_for('certificados')}}">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Certificados</span>
+            </a></li>
+          <li><a href="{{url_for('permisos')}}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Permisos</span>
+            </a></li>
+          <li><a href="{{url_for('incapacidades')}}">
+              <i class="fab fa-dochub"></i>
+              <span class="nav-item">Incapacidades</span>
+            </a></li>
+            <li><a href="{{url_for('empleados')}}">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Empleados</span>
+              </a></li>
+          <li><a href="{{url_for('dashboard')}}">
+              <span class="nav-item">Inicio</span>
+            </a></li>
+            <li><a href="{{url_for('index')}}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Cerrar sesion</span>
+            </a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main">
+        <div class="main-top">
+            <p>Consulta Permisos</p>
+            <div class="buttons">
+              <button onclick="toggleCreateForm()" class="btn btn-create">Crear</button>
+            </div>
+        </div>
+        <div class="main-body">
+            <h1>Permisos</h1>
+            <div class="col-25 p-2 m-auto">
+            <table class="table">
+                <thead class="bg-info">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre del Empleado</th>
+                        <th scope="col">Duración del Permiso (días)</th>
+                        <th scope="col">Número de Permiso</th>
+                        <th scope="col">Fecha Inicio del permiso</th>
+                        <th scope="col">Fecha Final del permiso</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in data %}
+                    <tr>
+                        <td>{{p.idPermisos}}</td>
+                        <td>{{p.nombre_empleado}}</td>
+                        <td>{{p.duracion}}</td>
+                        <td>{{p.fechaInicio}}</td>
+                        <td>{{p.fechaFin}}</td>
+                        <td>{{p.numPermiso}}</td>
+                        <td>
+                          <button onclick="toggleEditForm('{{ p.idPermisos }}')" class="btn btn-warning"><i class="fa-solid fa-user-pen"></i> Editar</button>
+                        </td>
+                        <td>
+                          <a href="{{ url_for('delete_permission', id=p.idPermisos) }}" class="btn btn-delete">Eliminar</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Formulario para crear permiso -->
+            <div class="form-container" id="create-form-container">
+                <form action="add_permission" method="POST">
+                  <div class="form-group">
+                    <center><label for="banco">Añadir un Permisos</label></center>
+                </div>
+                  <div class="form-group">
+                    <label for="nombre_empleado">Nombre del Empleado:</label>
+                    <select id="nombre_empleado" name="nombre_empleado" required>
+                        <option value="">--Seleccione un Empleado--</option>
+                        {% for empleado in empleados %}
+                        <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                    <div class="form-group">
+                        <label for="duracion">Duración del Permiso (días):</label>
+                        <input type="text" id="duracion" name="duracion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numPermiso">Número de Permiso:</label>
+                        <input type="text" id="numPermiso" name="numPermiso" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fechaInicio">Fecha De Inicio:</label>
+                      <input type="date" id="fechaInicio" name="fechaInicio" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="fechaFin">Fecha De Finalizacion:</label>
+                    <input type="date" id="fechaFin" name="fechaFin" required>
+                  </div>
+                    <button type="submit" class="btn btn-submit">Guardar</button>
+                </form>
+            </div>
+        </div>
+      
+        <!-- Formulario emergente de edición -->
+        {% for p in data %}
+        <div class="edit-form-container" id="edit-form-container-{{ p.idPermisos}}" style="display: none;">
+          <form action="{{ url_for('edit_permission', id=p.idPermisos) }}" method="POST">
+            <input type="hidden" id="edit_id" name="id" value="{{ p.idPermisos }}">
+            <div class="form-group">
+              <label for="edit_duracion">Duracion (Dias):</label>
+              <input type="text" id="edit_duracion" name="duracion" value="{{p.duracion}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_numPermiso">Numero del certificado:</label>
+              <input type="text" id="edit_numPermiso" name="numPermiso" value="{{p.numPermiso}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_fechaInicio">Fecha De Inicio:</label>
+              <input type="date" id="edit_fechaInicio" name="fechaInicio" value="{{p.fechaInicio}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_fechaFin">Fecha De Finalización:</label>
+              <input type="date" id="edit_fechaFin" name="fechaFin" value="{{p.fechaFin}}">
+            </div>
+            <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+          </form>
+        </div>
+      {% endfor %}
+      </div>
+  </section>
+  </div>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

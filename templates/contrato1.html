@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificados Laborales</title>
+  <link rel="icon" href="recursos1.jpg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/C_emp.css') }}" />
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+          <h1>Maria Sanchez</h1>
+        </div>
+        <ul>
+          <li><a href="{{url_for('contrato1')}}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Contratos</span>
+            </a></li>
+          <li><a href="{{url_for('certificados')}}">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Certificados</span>
+            </a></li>
+          <li><a href="{{url_for('permisos')}}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Permisos</span>
+            </a></li>
+          <li><a href="{{url_for('incapacidades')}}">
+              <i class="fab fa-dochub"></i>
+              <span class="nav-item">Incapacidades</span>
+            </a></li>
+            <li><a href="{{url_for('empleados')}}">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Empleado</span>
+              </a></li>
+          <li><a href="{{url_for('dashboard')}}">
+              <span class="nav-item">Inicio</span>
+            </a></li>
+            <li><a href="{{url_for('index')}}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Cerrar sesion</span>
+            </a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main">
+      <div class="main-top">
+        <p>Consulta Contratos</p>
+        <div class="buttons">
+          <button onclick="toggleCreateForm()" class="btn btn-create">Crear</button>
+        </div>
+      </div>
+      <div class="main-body">
+        <h1>Contratos</h1>
+        <div class="col-25 p-2 m-auto">
+          <table class="table">
+            <thead class="bg-info">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Banco</th>
+                <th scope="col">Fecha Inicio</th>
+                <th scope="col">Fecha Fin</th>
+                <th scope="col">Salario</th>
+                <th scope="col">Tipo de Contrato</th>
+                <th scope="col">Tipo de Cuenta</th>
+                <th scope="col">Administrador Encargado</th>
+                <th scope="col">Nombre del Empleado</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+              <tr>
+                <td>{{d.idContratoE}}</td>
+                <td>{{d.banco}}</td>
+                <td>{{d.fechaI}}</td>
+                <td>{{d.fechaF}}</td>
+                <td>{{d.salario}}</td>
+                <td>{{d.tipoContrato}}</td>
+                <td>{{d.tipoCuenta}}</td>
+                <td>{{ d.nombre_admin }}</td>
+                <td>{{ d.nombre_empleado }}</td>
+                <td>
+                  <button onclick="toggleEditForm('{{ d.idContratoE }}')" class="btn btn-warning"><i class="fa-solid fa-user-pen"></i> Editar</button>
+                </td>
+                <td>
+                  <a href="{{ url_for('delete_contract', id=d.idContratoE) }}" class="btn btn-delete">Eliminar</a>
+              </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Formulario para crear contrato -->
+        <div class="form-container" id="create-form-container" style="display: none;">
+          <form action="/add_contract" method="POST">
+            <div class="form-group">
+              <center><label for="banco">Añadir un contrato</label></center>
+            </div>
+            <div class="form-group">
+              <label for="banco">Banco:</label>
+              <input type="text" id="banco" name="banco" required>
+            </div>
+            <div class="form-group">
+              <label for="fechaI">Fecha Inicio:</label>
+              <input type="date" id="fechaI" name="fechaI" required>
+            </div>
+            <div class="form-group">
+              <label for="fechaF">Fecha Fin:</label>
+              <input type="date" id="fechaF" name="fechaF" required>
+            </div>
+            <div class="form-group">
+              <label for="salario">Salario:</label>
+              <input type="text" id="salario" name="salario" required>
+            </div>
+            <div class="form-group">
+              <label for="tipoContrato">Tipo de Contrato:</label>
+              <input type="text" id="tipoContrato" name="tipoContrato" required>
+            </div>
+            <div class="form-group">
+              <label for="tipoCuenta">Tipo de Cuenta:</label>
+              <input type="text" id="tipoCuenta" name="tipoCuenta" required>
+            </div>
+            <div class="form-group">
+              <label for="nombre_admin">Administrador Encargado:</label>
+              <select id="nombre_admin" name="nombre_admin" required>
+                {% for admin in admin %}
+                <option value="{{ admin.nomAdmin }}">{{ admin.nomAdmin }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="nombre_empleado">Nombre del Empleado:</label>
+              <select id="nombre_empleado" name="nombre_empleado" required>
+                <option value="">--Selecione un Empleado--</option>
+                {% for empleado in empleados %}
+                <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-submit">Guardar</button>
+          </form>
+        </div>
+
+        <!-- Formulario emergente de edición -->
+        {% for d in data %}
+        <div class="edit-form-container" id="edit-form-container-{{ d.idContratoE }}" style="display: none;">
+          <form action="{{ url_for('edit_contract', id=d.idContratoE) }}" method="POST">
+            <input type="hidden" id="edit_id" name="id" value="{{ d.idContratoE }}">
+            <div class="form-group">
+              <label for="edit_banco">Banco:</label>
+              <input type="text" id="edit_banco" name="banco" value="{{d.banco}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_fechaI">Fecha Inicio:</label>
+              <input type="date" id="edit_fechaI" name="fechaI" value="{{d.fechaI}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_fechaF">Fecha Fin:</label>
+              <input type="date" id="edit_fechaF" name="fechaF" value="{{d.fechaF}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_salario">Salario:</label>
+              <input type="text" id="edit_salario" name="salario" value="{{d.salario}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_tipoContrato">Tipo de Contrato:</label>
+              <input type="text" id="edit_tipoContrato" name="tipoContrato" value="{{d.tipoContrato}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_tipoCuenta">Tipo de Cuenta:</label>
+              <input type="text" id="edit_tipoCuenta" name="tipoCuenta" value="{{d.tipoCuenta}}">
+            </div>
+            <div class="form-group">
+              <label for="edit_nombre_admin">Administrador Encargado:</label>
+              <select id="edit_nombre_admin" name="nombre_admin">
+                {% for admin in admin %}
+                <option value="{{ admin.nomAdmin }}">{{ admin.nomAdmin }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit_nombre_empleado">Nombre del Empleado:</label>
+              <select id="edit_nombre_empleado" name="nombre_empleado">
+                {% for empleado in empleados %}
+                <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>

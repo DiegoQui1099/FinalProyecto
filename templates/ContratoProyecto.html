@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados Laborales</title>
+    <link rel="icon" href="recursos1.jpg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/C_emp.css') }}" />
+    <!-- Font Awesome Cdn Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="navbar">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+                    <h1> Jose Mendoza </h1>
+                </div>
+                <ul>
+                    <li><a href="{{url_for('dashproyectos')}}">
+                        Inicio
+                        <i class="fa-regular fa-house"></i>
+                    </a></li>
+                    <li><a href="{{url_for('solicitudes')}}">
+                        Solicitudes
+                        <i class="fas fa-envelope"></i>
+                    </a></li>
+                    <li><a href="{{url_for('index')}}" class="logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="nav-item">Cerrar sesion</span>
+                        </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="main">
+            <div class="main-top">
+                <p>Consulta Contratos</p>
+                <div class="buttons">
+                    <button onclick="toggleCreateForm()" class="btn btn-create">Crear</button>
+                </div>
+            </div>
+            <div class="main-body">
+                <h1>Contratos</h1>
+                <div class="col-25 p-2 m-auto">
+                    <table class="table">
+                        <thead class="bg-info">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Fecha Inicio</th>
+                                <th scope="col">Fecha Fin</th>
+                                <th scope="col">Coste</th>
+                                <th scope="col">Administrador Encargado</th>
+                                <th scope="col">Nombre del cliente</th>
+                                <th scope="col">Nombre del Empleado</th>
+                                <th scope="col">Ciudad</th>
+                                <th scope="col">Proyecto a realizar</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cp in data %}
+                            <tr>
+                                <td>{{ cp.idContratoP }}</td>
+                                <td>{{ cp.fechaI }}</td>
+                                <td>{{ cp.fechaF }}</td>
+                                <td>{{ cp.precio }}</td>
+                                <td>{{ cp.nombre_admin }}</td>
+                                <td>{{ cp.nom_cliente }}</td>
+                                <td>{{ cp.nombre_empleado }}</td>
+                                <td>{{ cp.nom_ciudad }}</td>
+                                <td>{{ cp.nom_proyecto }}</td>
+                                <td>
+                                    <button onclick="toggleEditForm('{{ cp.idContratoP }}')" class="btn btn-warning"><i
+                                            class="fa-solid fa-user-pen"></i> Editar</button>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('delete_contractP', id=cp.idContratoP) }}"
+                                        class="btn btn-delete">Eliminar</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Formulario para crear contrato -->
+                <div class="form-container" id="create-form-container" style="display: none;">
+                    <form action="/add_contractP" method="POST">
+                        <div class="form-group">
+                            <center><label for="">Añadir un contrato</label></center>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaI">Fecha Inicio:</label>
+                            <input type="date" id="fechaI" name="fechaI" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaF">Fecha Fin:</label>
+                            <input type="date" id="fechaF" name="fechaF" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Costo:</label>
+                            <input type="text" id="precio" name="precio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre_admin">Administrador Encargado:</label>
+                            <select id="nombre_admin" name="nombre_admin" required>
+                                {% for admin in admin %}
+                                <option value="{{ admin.nomAdmin }}">{{ admin.nomAdmin }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre_empleado">Nombre del Empleado:</label>
+                            <select id="nombre_empleado" name="nombre_empleado" required>
+                                <option value="">--Selecione un Empleado--</option>
+                                {% for empleado in empleados %}
+                                <option value="{{ empleado.nomEmpleado }}">{{ empleado.nomEmpleado }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nom_cliente">Nombre del cliente:</label>
+                            <select id="nom_cliente" name="nom_cliente" required>
+                                <option value="">--Selecione un cliente--</option>
+                                {% for cliente in clientes %}
+                                <option value="{{ cliente.nombreCliente }}">{{ cliente.nombreCliente }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nom_ciudad">Nombre de la ciudad:</label>
+                            <select id="nom_ciudad" name="nom_ciudad" required>
+                                <option value="">--Selecione una ciudad--</option>
+                                {% for ciudad in ciudades %}
+                                <option value="{{ ciudad.nomCiudad }}">{{ ciudad.nomCiudad }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nom_proyecto">Nombre del proyecto:</label>
+                            <select id="nom_proyecto" name="nom_proyecto" required>
+                                <option value="">--Selecione un proyecto--</option>
+                                {% for proyecto in proyectos %}
+                                <option value="{{ proyecto.nomProyecto }}">{{ proyecto.nomProyecto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Guardar</button>
+                    </form>
+                </div>
+
+                <!-- Formulario emergente de edición -->
+                {% for cp in data %}
+                <div class="edit-form-container" id="edit-form-container-{{ cp.idContratoP }}" style="display: none;">
+                    <form action="{{ url_for('edit_contractP', id=cp.idContratoP) }}" method="POST">
+                        <input type="hidden" id="edit_id" name="id" value="{{ cp.idContratoP }}">
+                        <div class="form-group">
+                            <label for="edit_fechaI">Fecha Inicio:</label>
+                            <input type="date" id="edit_fechaI" name="fechaI" value="{{cp.fechaI}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_fechaF">Fecha Fin:</label>
+                            <input type="date" id="edit_fechaF" name="fechaF" value="{{cp.fechaF}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_precio">Costo:</label>
+                            <input type="text" id="edit_precio" name="precio" value="{{cp.precio}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit_nombre_empleado">Nombre del Empleado:</label>
+                            <select id="edit_nombre_empleado" name="nombre_empleado">
+                                {% for empleado in empleados %}
+                                <option value="{{ empleado.nomEmpleado }}" {% if
+                                    empleado.nomEmpleado==cp.nombre_empleado %} selected {% endif %}>{{
+                                    empleado.nomEmpleado }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit_nom_cliente">Nombre del cliente:</label>
+                            <select id="edit_nom_cliente" name="nom_cliente" required>
+                                <option value="">--Seleccione un cliente--</option>
+                                {% for cliente in clientes %}
+                                <option value="{{ cliente.nombreCliente }}" {% if cliente.nombreCliente==cp.nom_cliente
+                                    %} selected {% endif %}>{{ cliente.nombreCliente }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit_nom_ciudad">Nombre de la ciudad:</label>
+                            <select id="edit_nom_ciudad" name="nom_ciudad" required>
+                                <option value="">--Seleccione una ciudad--</option>
+                                {% for ciudad in ciudades %}
+                                <option value="{{ ciudad.nomCiudad }}" {% if ciudad.nomCiudad==cp.nom_ciudad %} selected
+                                    {% endif %}>{{ ciudad.nomCiudad }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit_nom_proyecto">Nombre del proyecto:</label>
+                            <select id="edit_nom_proyecto" name="nom_proyecto" required>
+                                <option value="">--Seleccione un proyecto--</option>
+                                {% for proyecto in proyectos %}
+                                <option value="{{ proyecto.nomProyecto }}" {% if proyecto.nomProyecto==cp.nom_proyecto
+                                    %} selected {% endif %}>{{ proyecto.nomProyecto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>

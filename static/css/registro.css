@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #dfe9f5;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  font-size: 700;
+  text-decoration: none;
+  color: black;
+}
+
+.contenedor {
+  padding: 80px 0;
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.titulo {
+  color: #413477;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Header */
+
+header {
+  display: flex;
+  min-height: 70px;
+  background-color: #4082a5;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10%;
+}
+
+.header .nav-links li:hover {
+  transform: scale(1.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  width: auto;
+  height: 70px;
+  transition: all 0.3s;
+}
+
+.header .logo .img:hover {
+  transform: scale(1.2);
+}
+
+nav a {
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+.header .nav-links {
+  list-style: none;
+}
+
+.header .nav-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .btn button {
+  font-weight: 700;
+  color: #1b3039;
+  padding: 9px 25px;
+  background: #eceff1;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.header .btn button:hover {
+  background-color: #e2f1f8;
+  color: #af20d3;
+  transform: scale(1.1);
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+  }
+
+  nav {
+    padding: 10px 0px;
+  }
+}
+
+nav {
+  text-align: right;
+  padding: 30px 50px 0 0;
+}
+
+nav > a {
+  color: #524c69;
+  font-weight: 300;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+nav > a:hover {
+  text-decoration: underline;
+}
+
+header .textos-header {
+  display: flex;
+  height: 430px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.textos-header h1 {
+  font-size: 50px;
+  color: #524c69;
+}
+
+.textos-header h2 {
+  font-size: 50px;
+  font-weight: 300;
+  color: #524c69;
+}
+
+.signup-box {
+  width: 360px;
+  margin: auto;
+  background-color: white;
+  border-radius: 3px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 15px;
+}
+
+h4 {
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+form label {
+  display: flex;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+form input {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border: 1px solid gray;
+  border-radius: 6px;
+  outline: none;
+}
+
+input[type="button"] {
+  width: 100%;
+  height: 35px;
+  margin-top: 20px;
+  border: none;
+  background-color: #49c1a2;
+  color: white;
+  font-size: 18px;
+}
+
+p {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 15px;
+}
+
+.para-2 {
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  margin-top: -10px;
+}
+
+.para-2 a {
+  color: black;
+}
+
+/* footer */
+
+footer {
+  background: #4082a5;
+  padding: 60px 0 30px 0;
+  width: 100%;
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+
+.contenedor-footer {
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+  margin: auto;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.content-foo {
+  text-align: center;
+}
+
+.content-foo h4 {
+  color: #fff;
+  border-bottom: 3px solid #af20d3;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.content-foo p {
+  color: #fafafa;
+}
+
+.content-foo a {
+  color: #fafafa;
+}
+
+.titulo-final {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0 0 0;
+  color: black;
+}
+
+.buttons {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons a {
+  text-decoration: none;
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background: #314652;
+  color: #f1f1f1;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+}
+
+/* Estilo para el mensaje de éxito */
+#mensaje-exito {
+  display: none;
+  background-color: #49c1a2;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Estilo para el botón de registro */
+input[type="submit"] {
+  width: 100%;
+  height: 35px;
+  margin-top: 20px;
+  border: none;
+  background-color: #49c1a2;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #4082a5;
+}

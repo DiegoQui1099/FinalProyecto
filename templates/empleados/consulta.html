@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/Logo.jpeg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <title>Solicitudes de Proyecto</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="Logo">
+            <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index_emp') }}" class="nav-link">Inicio</a></li>
+                <li><a href="{{ url_for('rh_emp') }}" class="nav-link">Recursos Humanos</a></li>
+                <li><a href="{{ url_for('contacto_emp') }}" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+        {% if 'user_name' in session %}
+        <div class="dropdown">
+            <span class="nav-link">Bienvenido, {{ session['user_name'] }}</span>
+            <div class="dropdown-content">
+                {% if perfil_incompleto %}
+                <a href="{{ url_for('completar_perfilE') }}"><span class="danger">Perfil</span></a>
+                {% else %}
+                <a href="{{ url_for('perfilE') }}">Perfil</a>
+                {% endif %}
+                <br>
+                <a href="{{ url_for('cerrar_sesion') }}" class="">Cerrar Sesión</a>
+            </div>
+        </div>
+        {% else %}
+        <a href="{{ url_for('iniciosesion') }}" class="btn"><button>Iniciar Sesión</button></a>
+        {% endif %}
+    </header>
+
+    <main>
+        <section class="container-solicitudes">
+            <h2>Mis Solicitudes</h2>
+            {% if consultas %}
+            <table class="tabla-solicitudes">
+                <thead>
+                    <tr>
+                        <th>Tipo de Solicitud</th>
+                        <th>Motivo</th>
+                        <th>Fecha de Solicitud</th>
+                        <th>Estado</th>
+                        <th>Fecha de Respuesta</th>
+                        <th>Respuesta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in consultas %}
+                    <tr>
+                        <td>{{ c.tipoSolicitud }}</td>
+                        <td>{{ c.motivo }}</td>
+                        <td>{{ c.fechaSolicitud }}</td>
+                        <td>{{ c.estado }}</td>
+                        <td>{{ c.fechaRespuesta }}</td>
+                        <td>{{ c.respuesta }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No has realizado ninguna solicitud.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Mapa de sitio</h4>
+                <p><a href="Mapa de sitio.html">Mapa de sitio</a></p>
+            </div>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>serviciostopografic1@hotmail.com</p>
+            </div>
+            <div class="content-foo">
+                <h4>Redes</h4>
+                <section class="buttons">
+                    <a href="https://www.facebook.com/profile.php?id=100092641494792" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com/STopografi83139" class="fa fa-twitter"></a>
+                    <a href="https://www.instagram.com/stopograficos/?__coig_restricted=1" class="fa fa-instagram"></a>
+                </section>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Servicios Topográficos | Gaes 7</h2>
+    </footer>
+
+    <style>
+        /* Aquí puedes agregar estilos adicionales específicos para esta página si lo necesitas */
+        .container-solicitudes {
+            padding: 20px;
+            margin: 20px auto;
+            max-inline-size: 800px; /* Ajustado a max-width en lugar de max-inline-size */
+        }
+
+        .tabla-solicitudes {
+            inline-size: 100%; /* Ajustado a width en lugar de inline-size */
+            border-collapse: collapse;
+            margin-block-start: 20px; /* Ajustado a margin-top en lugar de margin-block-start */
+        }
+
+        .tabla-solicitudes th,
+        .tabla-solicitudes td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: start; /* Ajustado a text-align left */
+        }
+
+        .tabla-solicitudes th {
+            background-color: #f2f2f2;
+        }
+
+        .tabla-solicitudes td {
+            background-color: #fff;
+        }
+
+        .tabla-solicitudes tbody tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+    </style>
+</body>
+
+</html>

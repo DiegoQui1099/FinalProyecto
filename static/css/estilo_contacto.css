@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+.container-form {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    margin-top: 90px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.container-form h2 {
+    margin-bottom: 15px;
+    font-size: 35px;
+    text-align: center;
+}
+
+.container-form p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.container-form .campo {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 16px;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    outline: 0;
+    transition: border 0.3s;
+}
+
+.container-form .campo:focus {
+    border-color: #4082a5;
+}
+
+.container-form .btn-enviar {
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    outline: 0;
+    background: #3498db; /* Updated button color */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 300ms ease;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: auto;
+}
+
+.container-form .btn-enviar:hover {
+    background: #2980b9; /* Updated hover color */
+}
+
+footer {
+    background: #4082a5;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.titulo-final {
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    color: #fff;
+}
+
+header {
+    display: flex;
+    min-height: 70px;
+    background-color: #4082a5;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10%;
+}
+
+.header .nav-links {
+    list-style: none;
+}
+
+.header .nav-links li {
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.header .nav-links a {
+    font-weight: 600;
+    color: black; /* Updated color */
+    text-decoration: none;
+}
+
+.header .nav-links a:hover {
+    text-decoration: underline;
+}
+
+.header .btn button {
+    font-weight: 700;
+    color: black; /* Updated color */
+    padding: 9px 25px;
+    background: #eceff1;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 300ms ease;
+}
+
+.header .btn button:hover {
+    background-color: #e2f1f8;
+    color: #af20d3;
+    transform: scale(1.1);
+}
+
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+    }
+
+    nav {
+        padding: 10px 0px;
+    }
+
+    .container-form {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}

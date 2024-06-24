@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de proyectos</title>
+    <link rel="icon" href="recursos1.jpg">
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Proyectos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/certificado.css') }}" />
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/LogoEmp.png') }}" alt="Logo de la compañía" width="100px" height="100px">
+          <h1>Juan Mendoza
+          </h1>
+        </div>
+        <ul>
+          <li><a href="{{url_for('contratoProyecto')}}">
+            <i class="fas fa-user"></i>
+            <span class="nav-item">Consulte los contratos de proyectos</span>
+          </a>
+          </li>
+          <li><a href="{{url_for('solicitudes')}}">
+            <i class="fas fa-envelope"></i>
+            <span class="nav-item">Solicitudes de proyectos</span>
+          </a>
+          </li>
+          <li><a href="{{url_for('index')}}" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="nav-item">Cerrar sesion</span>
+          </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main">
+      <div class="main-top">
+        <p>Consulta todo relacionado a los proyectos</p>
+      </div>
+      <div class="main-body">
+        
+      
+      <div class="job_card">
+        <div class="job_details">
+          <div class="img">
+          </div>
+          <div class="text">
+            <h2>Contrato Proyectos</h2>
+            <span>Consulta y crea un contrato</span>
+          </div>
+        </div>
+        <div class="job_salary">
+        </div>
+      </div>
+      
+      <div class="job_card">
+        <div class="job_details">
+          <div class="img">
+          </div>
+          <div class="text">
+            <h2>Solicitudes</h2>
+            <span>Consulta las solicitudes de proyectos</span>
+          </div>
+        </div>
+        <div class="job_salary">
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+</body>
+</html>
+</body>
+</html>
